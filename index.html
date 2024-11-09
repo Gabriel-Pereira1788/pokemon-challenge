@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header >
+        <img src="./src/assets/pokemon.png" alt="PokeAPI Logo" class="logo">
+      </header>
+
+      <section id="controls" class="search_container">
+        <input type="text" id="searchInput" placeholder="Buscar Pokémon...">
+        <button id="searchButton">
+            <img src="./src/assets/pokeball.svg" alt="Search Icon" >
+        </button>
+      </section>
+
+      <section id="stats">
+        <p id="statsResult"></p>
+      </section>
+
+      <section class="pokemon_list"></section>
+
+      <script type="module" src="./main.js"></script>
+</body>
+</html>
