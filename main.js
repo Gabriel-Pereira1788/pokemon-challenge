@@ -1,29 +1,23 @@
-import { pokemonService } from './src/service/pokemonService.js';
+import { controller } from './src/controller/controller.js';
+import { pokemonService } from './src/services/pokemon/pokemonService.js';
 import { view } from './src/view/view.js';
 
-async function init(){
+async function main(){
     const pokemonsData = await pokemonService.getPokemons();
+    const pokemonsTypes = await pokemonService.getPokemonTypes();
 
-     handleRenderPokemonsList(pokemonsData);
-     view.addOnClickSearchEvent(onSearch);
-}
-async function onSearch(text){
-    if(text && text.length > 0){
-        const pokemonsData = await pokemonService.searchByText(text);
-         handleRenderPokemonsList(pokemonsData)
-    } else {
-        const pokemonsData = await pokemonService.getPokemons();
-        handleRenderPokemonsList(pokemonsData)
-    }
-}
+    controller.setInMemoryList(pokemonsData);
 
-
-function handleRenderPokemonsList(pokemonsData){
-    if(pokemonsData && pokemonsData.length > 0) {
-        view.renderPokemonsList(pokemonsData);
-    } else {
-        view.renderEmptyState();
-    }
+     view.renderPokemonsList(pokemonsData);
+     view.renderSectionOptions(pokemonsTypes)
+     view.addEvents({
+        searchButtonEvent:controller.onSearch,
+        sortAscButtonEvent:controller.onSort(),
+        sortDescButtonEvent:controller.onSort("reverse"),
+        selectTypeEvent:controller.onSelectType,
+     })
 }
 
-init();
+window.onload = () => {
+    main();
+}
