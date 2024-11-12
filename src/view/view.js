@@ -4,6 +4,7 @@ function renderPokemonsList(listData){
         pokemonListEl.innerHTML = listData
         .map(pokemon => buildCardElement(pokemon))
         .join('');
+
     } else {
         const pokemonListEl = document.querySelector('.pokemon_list');
         pokemonListEl.innerHTML = buildEmptyState('No Pokemons Found', 'Please try again.');
